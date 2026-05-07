@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        APP_REPO   = 'https://github.com/YOUR_USERNAME/student-app.git'
-        TEST_REPO  = 'https://github.com/YOUR_USERNAME/selenium-tests.git'
+        APP_REPO   = 'https://github.com/noorulhudashoukat86/student-app.git'
+        TEST_REPO  = 'https://github.com/noorulhudashoukat86/selenium-tests.git'
         APP_URL    = 'http://localhost:5000'
         COMPOSE_FILE = 'docker-compose.yml'
     }
