@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %}Students - SMS{% endblock %}
+{% block content %}
+<div class="page-header">
+    <h1 class="page-title">All <span>Students</span></h1>
+    <a href="/add" class="btn btn-primary" id="add-student-btn">+ Add Student</a>
+</div>
+
+<form class="search-bar" action="/search" method="get" id="search-form">
+    <input type="text" name="q" placeholder="Search by name, email or roll no..."
+           value="{{ search_query or '' }}" id="search-input">
+    <button type="submit" class="btn btn-secondary" id="search-btn">Search</button>
+    {% if search_query %}
+    <a href="/" class="btn btn-secondary">Clear</a>
+    {% endif %}
+</form>
+
+<div class="card" id="students-table">
+    {% if students %}
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Roll No</th>
+                <th>Email</th>
+                <th>Department</th>
+                <th>GPA</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="students-tbody">
+            {% for s in students %}
+            <tr class="student-row" data-id="{{ s.id }}">
+                <td><span class="badge">{{ loop.index }}</span></td>
+                <td><strong>{{ s.name }}</strong></td>
+                <td><code style="font-size:0.8rem;color:#888">{{ s.roll_no }}</code></td>
+                <td>{{ s.email }}</td>
+                <td>{{ s.department or '—' }}</td>
+                <td>{{ s.gpa or '—' }}</td>
+                <td>
+                    <div class="actions">
+                        <a href="/student/{{ s.id }}" class="btn btn-sm btn-secondary view-btn">View</a>
+                        <a href="/edit/{{ s.id }}" class="btn btn-sm btn-secondary edit-btn">Edit</a>
+                        <form action="/delete/{{ s.id }}" method="post" style="display:inline"
+                              onsubmit="return confirm('Delete this student?')" class="delete-form">
+                            <button type="submit" class="btn btn-sm btn-danger delete-btn">Delete</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="empty-state" id="empty-state">
+        <div class="icon">📋</div>
+        <p>No students found{% if search_query %} for "{{ search_query }}"{% endif %}.</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

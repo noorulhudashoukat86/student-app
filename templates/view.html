@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}{{ student.name }} - SMS{% endblock %}
+{% block content %}
+<div class="page-header">
+    <h1 class="page-title"><span>{{ student.name }}</span></h1>
+    <a href="/" class="btn btn-secondary">← Back</a>
+</div>
+<div class="form-card">
+    <div class="card" style="padding:2rem" id="student-detail">
+        <table style="width:100%">
+            <tr><td style="color:#666;font-family:monospace;font-size:.8rem;padding:.7rem 0;border-top:1px solid #2a2a2a">ID</td><td id="detail-id">{{ student.id }}</td></tr>
+            <tr><td style="color:#666;font-family:monospace;font-size:.8rem;padding:.7rem 0;border-top:1px solid #2a2a2a">NAME</td><td id="detail-name"><strong>{{ student.name }}</strong></td></tr>
+            <tr><td style="color:#666;font-family:monospace;font-size:.8rem;padding:.7rem 0;border-top:1px solid #2a2a2a">ROLL NO</td><td id="detail-roll">{{ student.roll_no }}</td></tr>
+            <tr><td style="color:#666;font-family:monospace;font-size:.8rem;padding:.7rem 0;border-top:1px solid #2a2a2a">EMAIL</td><td id="detail-email">{{ student.email }}</td></tr>
+            <tr><td style="color:#666;font-family:monospace;font-size:.8rem;padding:.7rem 0;border-top:1px solid #2a2a2a">DEPARTMENT</td><td id="detail-department">{{ student.department or '—' }}</td></tr>
+            <tr><td style="color:#666;font-family:monospace;font-size:.8rem;padding:.7rem 0;border-top:1px solid #2a2a2a">GPA</td><td id="detail-gpa">{{ student.gpa or '—' }}</td></tr>
+        </table>
+        <div class="form-actions" style="margin-top:1.5rem">
+            <a href="/edit/{{ student.id }}" class="btn btn-primary" id="edit-btn">Edit</a>
+            <form action="/delete/{{ student.id }}" method="post" style="display:inline"
+                  onsubmit="return confirm('Delete this student?')">
+                <button type="submit" class="btn btn-danger" id="delete-btn">Delete</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
