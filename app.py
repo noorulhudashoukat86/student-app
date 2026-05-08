@@ -40,7 +40,7 @@ def add_student():
         cursor = conn.cursor()
         try:
             cursor.execute(
-                "INSERT INTO students (name, email, roll_no, department, gpa) VALUES (%s, %s, %s, %s, %s)",
+                "INSERT INTO students (name,  roll_no,email, department, gpa) VALUES (%s, %s, %s, %s, %s)",
                 (name, email, roll, department, gpa or None)
             )
             conn.commit()
